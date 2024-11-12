@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Responsive Calculator</title>
+    <style>
+        /* Additional Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #field {
+            font-size: 1.5rem;
+            text-align: right;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .button {
+            font-size: 1.2rem;
+            color: white;
+            background-color: #555;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #777;
+        }
+
+        #butonz {
+            font-size: 1.2rem;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #btn {
+            background-color: #f39c12;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" id="butonz" onclick="changecolor()"> <i class="fa fa-fire"></i> </button>
+    <div class="calculator">
+        <input type="text" id="field" name="display" class="form-control mb-3" readonly>
+
+        <!-- Calculator Buttons -->
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="cleardisplay()">AC</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="removelast()">DEL</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('%')">%</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('/')">/</button>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('7')">7</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('8')">8</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('9')">9</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('*')">*</button>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('4')">4</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('5')">5</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('6')">6</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('-')">-</button>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('1')">1</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('2')">2</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('3')">3</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('+')">+</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <button class="button btn btn-block" onclick="display('0')">0</button>
+                </div>
+                <div class="col-3">
+                    <button class="button btn btn-block" onclick="display('.')">.</button>
+                </div>
+                <div class="col-3">
+                    <button id="btn" class="button btn btn-block" onclick="calculateResult()">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function display(value) {
+            document.getElementById('field').value += value;
+        }
+
+        function cleardisplay() {
+            document.getElementById('field').value = '';
+        }
+
+        function removelast() {
+            let a = document.getElementById('field').value;
+            document.getElementById('field').value = a.slice(0, -1);
+        }
+
+        function calculateResult() {
+            try {
+                let result = eval(document.getElementById('field').value);
+                document.getElementById('field').value = result;
+            } catch (error) {
+                document.getElementById('field').value = 'Error';
+            }
+        }
+
+        function changecolor() {
+            document.body.style.backgroundColor = document.body.style.backgroundColor === "white" ? "black" : "white";
+        }
+    </script>
+</body>
+</html>
